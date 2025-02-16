@@ -62,49 +62,98 @@
             color: var(--navy-blue);
         }
 
-        .user-category {
-            margin: 30px 0;
-            padding: 20px;
-            background: rgba(64, 224, 208, 0.1);
-            border-radius: 10px;
-            border-left: 4px solid var(--royal-blue);
+        .logo-container {
+            text-align: center;
+            margin: 20px 0;
+            animation: fadeInLogo 1s ease-out;
         }
-        
-        select, input[type="text"], input[type="email"] {
+
+        .logo {
+            max-width: 200px;
+            height: auto;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .signup-section {
+            background: rgba(64, 224, 208, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            border: 2px solid var(--turquoise);
+            margin: 20px 0;
+        }
+
+        .user-category {
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 5px;
+            border-left: 4px solid var(--royal-blue);
+            transition: all 0.3s ease;
+        }
+
+        .user-category:hover {
+            background: rgba(64, 224, 208, 0.05);
+            transform: translateX(5px);
+        }
+
+        select {
+            width: 100%;
             padding: 12px;
             margin: 5px 0;
             border-radius: 4px;
             border: 1px solid var(--royal-blue);
-            width: 250px;
             color: var(--navy-blue);
-        }
-        
-        #otherCategory {
-            margin-top: 10px;
+            background-color: white;
         }
 
-        .checkbox-container {
-            margin: 20px 0;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .consent-box {
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 5px;
+            border-left: 4px solid var(--royal-blue);
+            transition: all 0.3s ease;
         }
 
-        .checkbox-container input[type="checkbox"] {
+        .consent-box:hover {
+            background: rgba(64, 224, 208, 0.05);
+            transform: translateX(5px);
+        }
+
+        .consent-text {
+            font-size: 14px;
+            color: #666;
+            margin-top: 20px;
+            padding: 15px;
+            border-top: 1px solid var(--turquoise);
+        }
+
+        input[type="checkbox"] {
+            accent-color: var(--royal-blue);
             width: 18px;
             height: 18px;
-            cursor: pointer;
+            margin-right: 12px;
+            vertical-align: middle;
         }
 
         input[type="submit"] {
             background-color: var(--royal-blue);
             color: white;
-            padding: 12px 30px;
+            padding: 12px 25px;
             border: none;
-            border-radius: 4px;
+            border-radius: 5px;
             cursor: pointer;
+            width: 100%;
             font-size: 16px;
             transition: all 0.3s ease;
+            margin-top: 20px;
         }
 
         input[type="submit"]:hover {
@@ -129,19 +178,20 @@
             color: var(--navy-blue);
         }
 
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-            color: var(--navy-blue);
-        }
-
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
+        }
+
+        @keyframes fadeInLogo {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @media (max-width: 768px) {
@@ -153,8 +203,8 @@
                 font-size: 1.8em;
             }
 
-            select, input[type="text"], input[type="email"] {
-                width: 100%;
+            .signup-section {
+                padding: 20px;
             }
         }
     </style>
@@ -162,39 +212,54 @@
 <body>
     <div class="container">
         <h1>Sign Up for Magic-Notes-AI App Below:</h1>
+        
+        <div class="logo-container">
+            <img src="jpg/newlogo.jpeg" alt="Magic Notes Logo" class="logo">
+        </div>
+
         <p>Introducing Magic Notes AI: the ultimate tool for capturing, transcribing, and transforming lectures into stunning notes within your preferred note-taking app like GoodNotes, Notability, or Notion. Organize your thoughts, ideas, and tasks effortlessly with its user-friendly interface and robust features.</p>
         <p>Whether you're a student, a health professional, or simply a creative individual, Magic Notes is tailored to streamline your note-taking process and boost your productivity. Give it a try by filling out the fields below :)</p>
-        
-        <form id="signupForm" action="https://forms.gle/gc4RdqHP4vNhEJJt7" method="get" target="_blank">
-            <div class="user-category">
-                <label for="userType">I am a:</label>
-                <select id="userType" name="userType" required>
-                    <option value="">Please select...</option>
-                    <option value="student">Student</option>
-                    <option value="physician">Physician</option>
-                    <option value="health_professional">Other Health Professional</option>
-                    <option value="other">Other</option>
-                </select>
-                <input type="text" id="otherCategory" name="otherCategory" placeholder="Please specify" style="display: none;">
-            </div>
 
-            <div class="form-group">
-                <label for="email">Email Address:</label>
-                <input type="email" id="email" name="email" required placeholder="Enter your email">
-            </div>
+        <div class="signup-section">
+            <form id="signupForm" action="https://forms.gle/gc4RdqHP4vNhEJJt7" method="get" target="_blank">
+                <div class="user-category">
+                    <label for="userType">I am a:</label>
+                    <select id="userType" name="userType" required>
+                        <option value="">Please select...</option>
+                        <option value="student">Student</option>
+                        <option value="physician">Physician</option>
+                        <option value="health_professional">Other Health Professional</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <input type="text" id="otherCategory" name="otherCategory" placeholder="Please specify" style="display: none;">
+                </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" id="privacyConsent" name="privacyConsent" required>
-                <label for="privacyConsent">I have read and agree to the <a href="privacy-policy.html">Privacy Policy</a> and <a href="terms.html">Terms & Conditions</a></label>
-            </div>
+                <div class="consent-box">
+                    <input type="checkbox" id="smsConsent" name="smsConsent">
+                    <label for="smsConsent">
+                        Yes, I would like to receive text message updates about Magic Notes.
+                    </label>
+                </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" id="marketingConsent" name="marketingConsent">
-                <label for="marketingConsent">I agree to receive updates and marketing communications from Magic Notes</label>
-            </div>
+                <div class="consent-box">
+                    <input type="checkbox" id="emailConsent" name="emailConsent">
+                    <label for="emailConsent">
+                        Yes, I would like to receive email updates about Magic Notes.
+                    </label>
+                </div>
 
-            <input type="submit" value="Get Magic Notes Link">
-        </form>
+                <div class="consent-box">
+                    <input type="checkbox" id="privacyConsent" name="privacyConsent" required>
+                    <label for="privacyConsent">I have read and agree to the <a href="privacy-policy.html">Privacy Policy</a> and <a href="terms.html">Terms & Conditions</a></label>
+                </div>
+
+                <input type="submit" value="Get Magic Notes Link">
+
+                <p class="consent-text">
+                    By signing up, you agree to receive communications from Magic Notes. Message and data rates may apply. You can opt-out of SMS messages by replying STOP and unsubscribe from emails using the link in our emails. By signing up, you agree to our <a href="privacy-policy.html">Privacy Policy</a> and <a href="terms.html">Terms & Conditions</a>.
+                </p>
+            </form>
+        </div>
     </div>
     
     <div class="footer">
@@ -205,6 +270,8 @@
     <script>
         document.getElementById('userType').addEventListener('change', function() {
             const otherInput = document.getElementById('otherCategory');
+            const form = document.getElementById('signupForm');
+            
             if (this.value === 'other') {
                 otherInput.style.display = 'block';
                 otherInput.required = true;
@@ -212,12 +279,30 @@
                 otherInput.style.display = 'none';
                 otherInput.required = false;
             }
+
+            if (this.value === 'physician' || this.value === 'health_professional') {
+                form.action = "https://docs.google.com/forms/d/e/1FAIpQLScDYLYAHGMVcXzvpFV5A5m1rxIWIv9v6ZVGT6C5kxjpJ77W8w/viewform";
+                const smsConsent = document.getElementById('smsConsent').checked;
+                const emailConsent = document.getElementById('emailConsent').checked;
+                const consentParams = `?entry.13736358=${smsConsent ? 'Yes' : 'No'}&entry.1338889034=${emailConsent ? 'Yes' : 'No'}`;
+                form.action += consentParams;
+            } else {
+                form.action = "https://forms.gle/gc4RdqHP4vNhEJJt7";
+            }
         });
 
         document.getElementById('signupForm').addEventListener('submit', function(e) {
             if (!document.getElementById('privacyConsent').checked) {
                 e.preventDefault();
                 alert('Please accept the Privacy Policy and Terms & Conditions to continue.');
+                return;
+            }
+
+            const userType = document.getElementById('userType').value;
+            if (userType === 'physician' || userType === 'health_professional') {
+                if (!confirm('You will be redirected to our specialized healthcare professionals signup form. This form includes additional fields for clinic information and scheduling a customization call. Continue?')) {
+                    e.preventDefault();
+                }
             }
         });
     </script>
