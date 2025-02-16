@@ -6,13 +6,68 @@
     <title>Magic Notes - Sign Up</title>
     <style>
         /* Your CSS styles here */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .user-category {
+            margin-bottom: 20px;
+        }
+        
+        select, input[type="text"] {
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            width: 200px;
+        }
+        
+        #otherCategory {
+            margin-top: 10px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Sign Up for Magic-Notes-AI App Below:</h1>
         <p>Introducing Magic Notes AI: the ultimate tool for capturing, transcribing, and transforming lectures into stunning notes within your preferred note-taking app like GoodNotes, Notability, or Notion. Organize your thoughts, ideas, and tasks effortlessly with its user-friendly interface and robust features.</p>
-        <p>Whether you're a student, a professional, or simply a creative individual, Magic Notes is tailored to streamline your note-taking process and boost your productivity. Give it a try by filling out the fields below :)</p>
+        <p>Whether you're a student, a health professional, or simply a creative individual, Magic Notes is tailored to streamline your note-taking process and boost your productivity. Give it a try by filling out the fields below :)</p>
+        
+        <div class="user-category">
+            <label for="userType">I am a:</label>
+            <select id="userType" name="userType" required>
+                <option value="">Please select...</option>
+                <option value="student">Student</option>
+                <option value="physician">Physician</option>
+                <option value="health_professional">Other Health Professional</option>
+                <option value="other">Other</option>
+            </select>
+            <input type="text" id="otherCategory" name="otherCategory" placeholder="Please specify" style="display: none;">
+        </div>
+
         <form action="https://forms.gle/gc4RdqHP4vNhEJJt7" method="get" target="_blank">
             <input type="submit" value="Get Magic Notes Link">
         </form>
@@ -21,6 +76,19 @@
     <div class="footer">
         <p>© 2024 Magic Notes. All rights reserved.</p>
     </div>
+
+    <script>
+        document.getElementById('userType').addEventListener('change', function() {
+            const otherInput = document.getElementById('otherCategory');
+            if (this.value === 'other') {
+                otherInput.style.display = 'block';
+                otherInput.required = true;
+            } else {
+                otherInput.style.display = 'none';
+                otherInput.required = false;
+            }
+        });
+    </script>
 </body>
 </html>
 
