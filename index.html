@@ -270,8 +270,6 @@
     <script>
         document.getElementById('userType').addEventListener('change', function() {
             const otherInput = document.getElementById('otherCategory');
-            const form = document.getElementById('signupForm');
-            
             if (this.value === 'other') {
                 otherInput.style.display = 'block';
                 otherInput.required = true;
@@ -279,30 +277,33 @@
                 otherInput.style.display = 'none';
                 otherInput.required = false;
             }
-
-            if (this.value === 'physician' || this.value === 'health_professional') {
-                form.action = "https://docs.google.com/forms/d/e/1FAIpQLScDYLYAHGMVcXzvpFV5A5m1rxIWIv9v6ZVGT6C5kxjpJ77W8w/viewform";
-                const smsConsent = document.getElementById('smsConsent').checked;
-                const emailConsent = document.getElementById('emailConsent').checked;
-                const consentParams = `?entry.13736358=${smsConsent ? 'Yes' : 'No'}&entry.1338889034=${emailConsent ? 'Yes' : 'No'}`;
-                form.action += consentParams;
-            } else {
-                form.action = "https://forms.gle/gc4RdqHP4vNhEJJt7";
-            }
         });
 
+        function submitWithConsent() {
+            const smsConsent = document.getElementById('smsConsent').checked;
+            const emailConsent = document.getElementById('emailConsent').checked;
+            
+            const baseURL = 'https://docs.google.com/forms/d/e/1FAIpQLScDYLYAHGMVcXzvpFV5A5m1rxIWIv9v6ZVGT6C5kxjpJ77W8w/viewform';
+            const consentParams = `?entry.13736358=${smsConsent ? 'Yes' : ''}&entry.1338889034=${emailConsent ? 'Yes' : ''}`;
+            
+            window.location.href = baseURL + consentParams;
+        }
+
         document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
             if (!document.getElementById('privacyConsent').checked) {
-                e.preventDefault();
                 alert('Please accept the Privacy Policy and Terms & Conditions to continue.');
                 return;
             }
 
             const userType = document.getElementById('userType').value;
             if (userType === 'physician' || userType === 'health_professional') {
-                if (!confirm('You will be redirected to our specialized healthcare professionals signup form. This form includes additional fields for clinic information and scheduling a customization call. Continue?')) {
-                    e.preventDefault();
+                if (confirm('You will be redirected to our specialized healthcare professionals signup form. This form includes additional fields for clinic information and scheduling a customization call. Continue?')) {
+                    submitWithConsent();
                 }
+            } else {
+                window.location.href = "https://forms.gle/gc4RdqHP4vNhEJJt7";
             }
         });
     </script>
